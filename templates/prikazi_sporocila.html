@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seznam sporočil</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<style>
+    .panel{
+    margin-bottom: 20px;
+    }
+</style>
+
+
+
+</head>
+<body>
+<div class="container">
+    <div class="col-lg-12">
+                <h1 class="page-header" style="text-align:center">
+                    Welcome to Patricia's chat!
+                </h1>
+            </div>
+
+    <a href="prikazi-sporocila" class="btn btn-success">Refresh</a>
+
+    <div class="col-md-4">
+        {% for sporocilo in vsa_sporocila %}
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                        <h4><i class="fa fa-fw fa-check"></i> <b>{{ sporocilo.ime }}:</b> {{ sporocilo.nastanek }}</h4>
+                </div>
+                <div class="panel-body">
+                        <p>{{ sporocilo.tekst }}</p>
+                    <p><a href="/sporocilo/{{ sporocilo.key.id() }}/izbrisi">Izbriši</a></p>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+
+<div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Vnesi svoje sporočilo</h4>
+            </div>
+
+            <div class="panel-body">
+                <form method="post" action="/poslji-sporocilo">
+                        <p>
+                            <input type="text" class="form-control" name="ime" placeholder="Vnesi ime">
+                        </p>
+                        <p>
+                            <input type="text" class="form-control" name="sporocilo" placeholder="Vnesi sporočilo">
+                        </p>
+                        <p>
+                            <button type="submit" class="btn btn-success">Objavi</button>
+                        </p>
+                    </form>
+            </div>
+
+</body>
+</html>
