@@ -15,6 +15,10 @@
     .panel{
     margin-bottom: 20px;
     }
+    .left{
+    float: right;
+    display :inline;
+    }
 </style>
 
 
@@ -28,13 +32,15 @@
                 </h1>
             </div>
 
-    <a href="prikazi-sporocila" class="btn btn-success">Refresh</a>
+    <!-- <a href="prikazi-sporocila" class="btn btn-success">Refresh</a>-->
 
     <div class="col-md-4">
         {% for sporocilo in vsa_sporocila %}
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                        <h4><i class="fa fa-fw fa-check"></i> <b>{{ sporocilo.ime }}:</b> {{ sporocilo.nastanek }}</h4>
+                        <b>{{ sporocilo.ime }}:</b>
+                            <div class="left">{{ sporocilo.nastanek.day }}.{{ sporocilo.nastanek.month }}.{{ sporocilo.nastanek.year }}
+                        {{ sporocilo.nastanek.hour }}:{{ sporocilo.nastanek.minute }}</div>
                 </div>
                 <div class="panel-body">
                         <p>{{ sporocilo.tekst }}</p>

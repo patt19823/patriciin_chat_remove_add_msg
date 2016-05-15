@@ -2,6 +2,7 @@
 import os
 import jinja2
 import webapp2
+import cgi
 from datetime import datetime
 
 from models import Sporocilo
@@ -39,6 +40,9 @@ class PosljiSporociloHandler(BaseHandler):
     def post(self):
         uporabnikovo_ime = self.request.get("ime")
         uporabnikovo_sporocilo = self.request.get("sporocilo")
+        uporabnikovo_ime = cgi.escape(uporabnikovo_ime)
+        uporabnikovo_sporocilo = cgi.escape(uporabnikovo_sporocilo)
+
 
         sporocilo = Sporocilo(ime=uporabnikovo_ime, tekst=uporabnikovo_sporocilo)
         sporocilo.put()
@@ -52,7 +56,7 @@ class PrikaziSporocilaHandler(BaseHandler):
         vsa_sporocila = Sporocilo.query().order(Sporocilo.nastanek).fetch()
 
         view_vars = {
-            "vsa_sporocila": vsa_sporocila
+            "vsa_sporocila": vsa_sporocila,
         }
 
         return self.render_template("prikazi_sporocila.html", view_vars)
